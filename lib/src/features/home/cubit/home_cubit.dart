@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-part 'login_state.dart';
+part 'home_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
-  LoginCubit() : super(const LoginInitial());
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit() : super(const HomeInitial());
 
   FutureOr<void> yourCustomFunction() {}
 }

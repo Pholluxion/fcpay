@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:fcpay/src/features/login/cubit/cubit.dart';
+import 'package:fcpay/src/features/home/cubit/cubit.dart';
 
-class LoginBody extends StatelessWidget {
-  const LoginBody({super.key});
+class HomeBody extends StatelessWidget {
+  const HomeBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(
+    return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return Center(child: Text(state.customProperty));
       },

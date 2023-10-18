@@ -1,7 +1,7 @@
-part of 'login_cubit.dart';
+part of 'home_cubit.dart';
 
-class LoginState extends Equatable {
-  const LoginState({
+class HomeState extends Equatable {
+  const HomeState({
     this.customProperty = 'Default Value',
   });
 
@@ -10,15 +10,15 @@ class LoginState extends Equatable {
   @override
   List<Object> get props => [customProperty];
 
-  LoginState copyWith({
+  HomeState copyWith({
     String? customProperty,
   }) {
-    return LoginState(
+    return HomeState(
       customProperty: customProperty ?? this.customProperty,
     );
   }
 }
 
-class LoginInitial extends LoginState {
-  const LoginInitial() : super();
+class HomeInitial extends HomeState {
+  const HomeInitial() : super();
 }
