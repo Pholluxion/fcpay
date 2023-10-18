@@ -8,6 +8,8 @@ import 'features/login/login.dart';
 import 'features/qr/qr.dart';
 import 'utils/widgets/widgets.dart';
 
+import 'features/qr/view/qr_code_generator.dart';
+
 part 'router.g.dart';
 
 const routerInitialLocation = '/login';
@@ -82,5 +84,18 @@ class OnboardingPageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const OnboardingPage();
+  }
+}
+
+@TypedGoRoute<QRViewScreenRoute>(
+  path: '/qr-view',
+  name: 'QR-View',
+)
+class QRViewScreenRoute extends GoRouteData {
+  const QRViewScreenRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return QRViewScreen(data: "hola");
   }
 }

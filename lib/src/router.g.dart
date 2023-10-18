@@ -11,6 +11,7 @@ List<RouteBase> get $appRoutes => [
       $qRPageRoute,
       $homePageRoute,
       $onboardingPageRoute,
+      $qRViewScreenRoute,
     ];
 
 RouteBase get $loginPageRoute => GoRouteData.$route(
@@ -84,7 +85,7 @@ extension $HomePageRouteExtension on HomePageRoute {
 }
 
 RouteBase get $onboardingPageRoute => GoRouteData.$route(
-      path: '/Onboarding',
+      path: '/onboarding',
       name: 'Onboarding',
       factory: $OnboardingPageRouteExtension._fromState,
     );
@@ -94,7 +95,31 @@ extension $OnboardingPageRouteExtension on OnboardingPageRoute {
       const OnboardingPageRoute();
 
   String get location => GoRouteData.$location(
-        '/Onboarding',
+        '/onboarding',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $qRViewScreenRoute => GoRouteData.$route(
+      path: '/qr-view',
+      name: 'QR-View',
+      factory: $QRViewScreenRouteExtension._fromState,
+    );
+
+extension $QRViewScreenRouteExtension on QRViewScreenRoute {
+  static QRViewScreenRoute _fromState(GoRouterState state) =>
+      const QRViewScreenRoute();
+
+  String get location => GoRouteData.$location(
+        '/qr-view',
       );
 
   void go(BuildContext context) => context.go(location);

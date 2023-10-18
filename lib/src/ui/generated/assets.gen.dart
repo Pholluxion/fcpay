@@ -128,7 +128,6 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
-        coins,
         continueWithApple,
         continueWithFacebook,
         continueWithGoogle,
