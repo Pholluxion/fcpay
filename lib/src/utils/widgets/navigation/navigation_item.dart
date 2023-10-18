@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:recase/recase.dart';
 
 enum NavigationItem {
-  dashboard(iconData: Icons.dashboard_outlined),
-  users(iconData: Icons.list_outlined),
+  home(iconData: Icons.dashboard_outlined),
+  qrview(iconData: Icons.qr_code),
   ;
 
   const NavigationItem({required this.iconData});

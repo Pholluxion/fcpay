@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 
 import '../generated/generated.dart';
 
-/// {@template app_logo}
-/// A default app logo.
-/// {@endtemplate}
 class AppLogo extends StatelessWidget {
-  /// {@macro app_logo}
-  const AppLogo({super.key});
+  const AppLogo({
+    super.key,
+    this.height,
+    this.width,
+  });
+
+  final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
-    return Assets.images.logoLight.image(height: 150.0, width: 100.0);
+    return Assets.images.logo.image(
+      height: height ?? 150,
+      width: width ?? 100,
+    );
   }
 }

@@ -5,15 +5,14 @@ import 'package:qr_flutter/qr_flutter.dart';
 class QRViewScreen extends StatelessWidget {
   final String data;
 
-  QRViewScreen({required this.data});
+  const QRViewScreen({
+    super.key,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('QR generation'),
-        backgroundColor: Colors.blue,
-      ),
       body: Center(
         child: QrImageView(
           data: data,

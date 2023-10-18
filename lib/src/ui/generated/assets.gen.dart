@@ -115,6 +115,9 @@ class $AssetsImagesGen {
   SvgGenImage get continueWithTwitter =>
       const SvgGenImage('assets/images/continue_with_twitter.svg');
 
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
   /// File path: assets/images/logo_dark.png
   AssetGenImage get logoDark =>
       const AssetGenImage('assets/images/logo_dark.png');
@@ -129,6 +132,7 @@ class $AssetsImagesGen {
         continueWithFacebook,
         continueWithGoogle,
         continueWithTwitter,
+        logo,
         logoDark,
         logoLight
       ];

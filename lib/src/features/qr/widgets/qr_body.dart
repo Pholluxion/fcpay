@@ -1,3 +1,4 @@
+import 'package:fcpay/src/ui/ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -27,6 +28,7 @@ class _QrBodyState extends State<QrBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(backgroundColor: const Color(0xffA7E04B)),
       body: Stack(
         children: <Widget>[
           Expanded(
@@ -37,12 +39,7 @@ class _QrBodyState extends State<QrBody> {
               onQRViewCreated: _onQRViewCreated,
             ),
           ),
-          // Center(
-          //   child: (result != null)
-          //       ? Text(
-          //           'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-          //       : const Text('Scan a code'),
-          // ),
+          const Center(child: AppLogo())
         ],
       ),
     );

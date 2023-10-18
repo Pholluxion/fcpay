@@ -1,59 +1,65 @@
-import 'package:fcpay/src/features/login/cubit/cubit.dart';
+import 'dart:developer';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../ui/spacing/app_spacing.dart';
 import '../../../ui/widgets/widgets.dart';
 import '../../../utils/widgets/text_password_field.dart';
+import '../cubits/cubits.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginState>(
-      listener: (context, state) {
-        if (state.status.isFailure) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage ?? 'Error al autenticarse'),
-              ),
-            );
-        }
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<LoginCubit, LoginState>(
+          listener: (context, state) {
+            if (state.status.isFailure) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content:
+                        Text(state.errorMessage ?? 'Error al autenticarse'),
+                  ),
+                );
+            }
 
-        if (state.status.isSuccess) {
-          context.go('/qr-scanner');
-        }
-      },
-      child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xff279445),
-              Color(0xffA7E04B),
-            ],
-          ),
+            if (state.status.isSuccess) {
+              context.go('/home');
+            }
+          },
         ),
-        child: Center(
-          child: ListView(
-            physics: const ClampingScrollPhysics(),
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(AppSpacing.xlg),
-            children: [
-              const AppLogo(),
-              const SizedBox(height: 16),
-              _EmailInput(),
-              const SizedBox(height: 8),
-              _PasswordInput(),
-              const SizedBox(height: 8),
-              _LoginButton(),
-              const SizedBox(height: 8),
-              _FingerPrintButton(),
-            ],
-          ),
+        BlocListener<LocalAuthCubit, LocalAuthState>(
+          listener: (context, state) {
+            if (state.isAuthenticated) {
+              context.go('/home');
+            }
+          },
+        ),
+      ],
+      child: Center(
+        child: ListView(
+          physics: const ClampingScrollPhysics(),
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(AppSpacing.xlg),
+          children: [
+            const AppLogo(),
+            const SizedBox(height: 16),
+            _EmailInput(),
+            const SizedBox(height: 8),
+            _PasswordInput(),
+            const SizedBox(height: 8),
+            _LoginButton(),
+            const SizedBox(height: 8),
+            _FingerPrintButton(),
+          ],
         ),
       ),
     );
@@ -99,7 +105,7 @@ class _LoginButton extends StatelessWidget {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         return state.status.isInProgress
-            ? const CircularProgressIndicator()
+            ? const LinearProgressIndicator()
             : AppButton.green(
                 key: const Key('loginForm_continue_raisedButton'),
                 onPressed: state.isValid
@@ -118,17 +124,32 @@ class _LoginButton extends StatelessWidget {
 class _FingerPrintButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(
+    return BlocBuilder<LocalAuthCubit, LocalAuthState>(
       builder: (context, state) {
-        return IconButton(
-          key: const Key('biometric_Form_continue_raisedButton'),
-          onPressed: state.isValid
-              ? () => context.read<LoginCubit>().logInWithCredentials()
-              : null,
-          icon: const Icon(
-            Icons.fingerprint,
-            size: 100.0,
-            color: Colors.black54,
+        return Visibility(
+          visible: !kIsWeb,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+            child: OutlinedButton(
+              key: const Key('biometric_Form_continue_raisedButton'),
+              onPressed: () {
+                log('biometric_Form_continue_raisedButton');
+                context.read<LocalAuthCubit>().init();
+              },
+              style: OutlinedButton.styleFrom(
+                shape: const CircleBorder(),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: state.isEnabled
+                    ? const CircularProgressIndicator.adaptive()
+                    : const Icon(
+                        Icons.fingerprint,
+                        size: 100.0,
+                        color: Colors.black54,
+                      ),
+              ),
+            ),
           ),
         );
       },

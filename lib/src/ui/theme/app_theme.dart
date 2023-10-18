@@ -271,7 +271,7 @@ InputBorder get _textFieldBorder => const UnderlineInputBorder(
 
 BottomNavigationBarThemeData get _bottomAppBarTheme {
   return BottomNavigationBarThemeData(
-    backgroundColor: AppColors.darkBackground,
+    backgroundColor: const Color(0xffA7E04B),
     selectedItemColor: AppColors.white,
     unselectedItemColor: AppColors.white.withOpacity(0.74),
   );

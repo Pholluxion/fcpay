@@ -35,6 +35,13 @@ dependencies:
   recase: ^4.1.0
   responsive_framework: ^1.1.1
   url_launcher: ^6.1.14
+  local_auth_ios: ^1.1.4
+  local_auth_android: ^1.0.34
+  local_auth_platform_interface: ^1.0.8
+  logger: ^2.0.2
+  path_provider: ^2.1.1
+  google_fonts: ^6.1.0
+  shared_preferences: ^2.2.2
 
 
 dev_dependencies:
@@ -48,6 +55,7 @@ dev_dependencies:
   chopper_generator: ^7.0.6
   build_runner: ^2.4.6
   json_serializable: ^6.7.1
+  flutter_native_splash: ^2.3.4
 
 
 flutter:

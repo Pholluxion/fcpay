@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
+import '../../../ui/widgets/app_logo.dart';
 import 'navigation.dart';
 
 class ScaffoldWithNavigation extends StatelessWidget {
@@ -18,7 +18,7 @@ class ScaffoldWithNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final breakpoint = ResponsiveBreakpoints.of(context).breakpoint;
     return switch (breakpoint.name) {
-      MOBILE || TABLET => _ScaffoldWithDrawer(navigationShell),
+      MOBILE || TABLET || DESKTOP => _ScaffoldWithDrawer(navigationShell),
       (_) => _ScaffoldWithNavigationRail(navigationShell),
     };
   }
@@ -45,10 +45,6 @@ class _ScaffoldWithNavigationRail extends StatelessWidget {
                   expand: false,
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(16),
-                child: ThemeModeButton.icon(),
-              ),
             ],
           ),
           VerticalDivider(
@@ -70,33 +66,30 @@ class _ScaffoldWithDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       appBar: const NavigationAppBar(),
       body: navigationShell,
       drawer: Drawer(
         child: Column(
           children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(border: Border()),
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                border: Border(),
+                color: Color(0xffA7E04B),
+              ),
               margin: EdgeInsets.zero,
               child: Center(
-                child: Text(
-                  AppLocalizations.of(context)!.appTitle,
-                  style: theme.textTheme.bodyMedium!
-                      .copyWith(fontWeight: FontWeight.w600),
+                child: AppLogo(
+                  height: 250,
+                  width: 250,
                 ),
               ),
             ),
             Expanded(
               child: _NavigationRail(
                 navigationShell: navigationShell,
-                expand: true,
+                expand: false,
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16),
-              child: ThemeModeButton.outlined(),
             ),
           ],
         ),

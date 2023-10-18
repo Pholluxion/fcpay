@@ -8,9 +8,9 @@ class NavigationAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: const Color(0xffA7E04B),
       title: const NavigationTitle(),
       centerTitle: false,
-      elevation: 4,
     );
   }
 

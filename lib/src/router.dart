@@ -12,7 +12,7 @@ import 'features/qr/view/qr_code_generator.dart';
 
 part 'router.g.dart';
 
-const routerInitialLocation = '/login';
+const routerInitialLocation = '/init';
 
 final router = GoRouter(
   routes: $appRoutes,
@@ -20,6 +20,26 @@ final router = GoRouter(
   initialLocation: routerInitialLocation,
 );
 
+@TypedStatefulShellRoute<ShellRouteData>(
+  branches: [
+    TypedStatefulShellBranch(
+      routes: [
+        TypedGoRoute<HomePageRoute>(
+          path: '/home',
+          name: 'Home',
+        ),
+      ],
+    ),
+    TypedStatefulShellBranch(
+      routes: [
+        TypedGoRoute<QRViewScreenRoute>(
+          path: '/qr-view',
+          name: 'QR-View',
+        )
+      ],
+    ),
+  ],
+)
 class ShellRouteData extends StatefulShellRouteData {
   const ShellRouteData();
 
@@ -35,36 +55,6 @@ class ShellRouteData extends StatefulShellRouteData {
   }
 }
 
-@TypedGoRoute<LoginPageRoute>(
-  path: '/login',
-  name: 'Login',
-)
-class LoginPageRoute extends GoRouteData {
-  const LoginPageRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const LoginPage();
-  }
-}
-
-@TypedGoRoute<QRPageRoute>(
-  path: '/qr-scanner',
-  name: 'QR-Scanner',
-)
-class QRPageRoute extends GoRouteData {
-  const QRPageRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const QrPage();
-  }
-}
-
-@TypedGoRoute<HomePageRoute>(
-  path: '/home',
-  name: 'Home',
-)
 class HomePageRoute extends GoRouteData {
   const HomePageRoute();
 
@@ -75,8 +65,18 @@ class HomePageRoute extends GoRouteData {
 }
 
 @TypedGoRoute<OnboardingPageRoute>(
-  path: '/onboarding',
+  path: '/init',
   name: 'Onboarding',
+  routes: [
+    TypedGoRoute<LoginPageRoute>(
+      path: 'login',
+      name: 'Login',
+    ),
+    TypedGoRoute<QRPageRoute>(
+      path: 'qr-scanner',
+      name: 'QR-Scanner',
+    )
+  ],
 )
 class OnboardingPageRoute extends GoRouteData {
   const OnboardingPageRoute();
@@ -87,15 +87,29 @@ class OnboardingPageRoute extends GoRouteData {
   }
 }
 
-@TypedGoRoute<QRViewScreenRoute>(
-  path: '/qr-view',
-  name: 'QR-View',
-)
+class LoginPageRoute extends GoRouteData {
+  const LoginPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LoginPage();
+  }
+}
+
+class QRPageRoute extends GoRouteData {
+  const QRPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const QrPage();
+  }
+}
+
 class QRViewScreenRoute extends GoRouteData {
   const QRViewScreenRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return QRViewScreen(data: "hola");
+    return const QRViewScreen(data: "hola");
   }
 }

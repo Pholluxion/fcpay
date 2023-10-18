@@ -16,7 +16,6 @@ import 'app_font_weight.dart';
 /// UI Text Style Definitions
 abstract class UITextStyle {
   static const _baseTextStyle = TextStyle(
-    package: 'app_ui',
     fontWeight: AppFontWeight.regular,
     fontFamily: 'NotoSansDisplay',
     decoration: TextDecoration.none,
@@ -140,7 +139,6 @@ abstract class UITextStyle {
 /// Content Text Style Definitions
 abstract class ContentTextStyle {
   static const _baseTextStyle = TextStyle(
-    package: 'app_ui',
     fontWeight: AppFontWeight.regular,
     fontFamily: 'NotoSerif',
     decoration: TextDecoration.none,

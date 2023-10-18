@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chopper/chopper.dart';
 
 import '../api/login_api.dart';
@@ -7,7 +5,7 @@ import '../api/login_api.dart';
 class LoginRepository {
   LoginRepository();
 
-  Future<void> logInWithEmailAndPassword({
+  Future<Response<dynamic>> logInWithEmailAndPassword({
     required String email,
     required String pass,
   }) async {
@@ -25,7 +23,7 @@ class LoginRepository {
         "password": pass,
       },
     );
-    log(response.bodyString);
     chopper.dispose();
+    return response;
   }
 }

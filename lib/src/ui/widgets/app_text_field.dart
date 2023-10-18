@@ -73,11 +73,16 @@ class AppTextField extends StatelessWidget {
             autofillHints: autoFillHints,
             cursorColor: AppColors.green,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.normal,
+                  color: AppColors.black,
                 ),
             onFieldSubmitted: onSubmitted,
             decoration: InputDecoration(
               hintText: hintText,
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(color: AppColors.black),
               errorText: errorText,
               prefixIcon: prefix,
               suffixIcon: suffix,
