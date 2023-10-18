@@ -5,10 +5,6 @@ import 'package:fcpay/src/features/login/widgets/login_body.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
-  static Route<dynamic> route() {
-    return MaterialPageRoute<dynamic>(builder: (_) => const LoginPage());
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
