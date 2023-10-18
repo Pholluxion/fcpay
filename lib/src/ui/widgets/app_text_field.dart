@@ -3,12 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../colors/app_colors.dart';
 
-/// {@template app_text_field}
-/// A text field component based on material [TextFormField] widget with a
-/// fixed, left-aligned label text displayed above the text field.
-/// {@endtemplate}
 class AppTextField extends StatelessWidget {
-  /// {@macro app_text_field}
   const AppTextField({
     super.key,
     this.initialValue,
@@ -25,55 +20,37 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.onSubmitted,
     this.onTap,
+    this.obscureText = false,
   });
 
-  /// A value to initialize the field to.
   final String? initialValue;
 
-  /// List of auto fill hints.
   final Iterable<String>? autoFillHints;
 
-  /// Controls the text being edited.
-  ///
-  /// If null, this widget will create its own [TextEditingController] and
-  /// initialize its [TextEditingController.text] with [initialValue].
   final TextEditingController? controller;
 
-  /// Optional input validation and formatting overrides.
   final List<TextInputFormatter>? inputFormatters;
 
-  /// Whether to enable autocorrect.
-  /// Defaults to true.
   final bool autocorrect;
 
-  /// Whether the text field should be read-only.
-  /// Defaults to false.
   final bool readOnly;
 
-  /// Text that suggests what sort of input the field accepts.
+  final bool obscureText;
+
   final String? hintText;
 
-  /// Text that appears below the field.
   final String? errorText;
 
-  /// A widget that appears before the editable part of the text field.
   final Widget? prefix;
 
-  /// A widget that appears after the editable part of the text field.
   final Widget? suffix;
 
-  /// The type of keyboard to use for editing the text.
-  /// Defaults to [TextInputType.text] if maxLines is one and
-  /// [TextInputType.multiline] otherwise.
   final TextInputType? keyboardType;
 
-  /// Called when the user inserts or deletes texts in the text field.
   final ValueChanged<String>? onChanged;
 
-  /// {@macro flutter.widgets.editableText.onSubmitted}
   final ValueChanged<String>? onSubmitted;
 
-  /// Called when the text field has been tapped.
   final VoidCallback? onTap;
 
   @override
@@ -86,6 +63,7 @@ class AppTextField extends StatelessWidget {
           constraints: const BoxConstraints(minHeight: 80),
           child: TextFormField(
             key: key,
+            obscureText: obscureText,
             initialValue: initialValue,
             controller: controller,
             inputFormatters: inputFormatters,
@@ -93,7 +71,7 @@ class AppTextField extends StatelessWidget {
             autocorrect: autocorrect,
             readOnly: readOnly,
             autofillHints: autoFillHints,
-            cursorColor: AppColors.darkAqua,
+            cursorColor: AppColors.green,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w500,
                 ),

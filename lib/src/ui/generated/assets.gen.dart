@@ -99,9 +99,6 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/coins.svg
-  SvgGenImage get coins => const SvgGenImage('assets/images/coins.svg');
-
   /// File path: assets/images/continue_with_apple.svg
   SvgGenImage get continueWithApple =>
       const SvgGenImage('assets/images/continue_with_apple.svg');
@@ -169,7 +166,7 @@ class AssetGenImage {
     bool matchTextDirection = false,
     bool gaplessPlayback = false,
     bool isAntiAlias = false,
-    String? package = 'fcpay',
+    String? package,
     FilterQuality filterQuality = FilterQuality.low,
     int? cacheWidth,
     int? cacheHeight,
@@ -204,7 +201,7 @@ class AssetGenImage {
 
   ImageProvider provider({
     AssetBundle? bundle,
-    String? package = 'fcpay',
+    String? package,
   }) {
     return AssetImage(
       _assetName,
@@ -215,7 +212,7 @@ class AssetGenImage {
 
   String get path => _assetName;
 
-  String get keyName => 'packages/fcpay/$_assetName';
+  String get keyName => _assetName;
 }
 
 class SvgGenImage {
@@ -227,7 +224,7 @@ class SvgGenImage {
     Key? key,
     bool matchTextDirection = false,
     AssetBundle? bundle,
-    String? package = 'fcpay',
+    String? package,
     double? width,
     double? height,
     BoxFit fit = BoxFit.contain,
@@ -268,5 +265,5 @@ class SvgGenImage {
 
   String get path => _assetName;
 
-  String get keyName => 'packages/fcpay/$_assetName';
+  String get keyName => _assetName;
 }

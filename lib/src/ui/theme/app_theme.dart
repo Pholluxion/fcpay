@@ -15,7 +15,7 @@ class AppTheme {
   /// Default `ThemeData` for App UI.
   ThemeData get themeData {
     return ThemeData(
-      useMaterial3: true,
+      useMaterial3: false,
       canvasColor: _backgroundColor,
       scaffoldBackgroundColor: _backgroundColor,
       iconTheme: _iconTheme,
@@ -41,7 +41,8 @@ class AppTheme {
 
   ColorScheme get _colorScheme {
     return ColorScheme.light(
-      secondary: AppColors.secondary,
+      primary: const Color(0xff279445),
+      secondary: const Color(0xffA7E04B),
       background: _backgroundColor,
     );
   }
@@ -148,12 +149,11 @@ class AppTheme {
       enabledBorder: _textFieldBorder,
       focusedBorder: _textFieldBorder,
       disabledBorder: _textFieldBorder,
-      hintStyle: UITextStyle.bodyText1.copyWith(
-        color: AppColors.mediumEmphasisSurface,
-      ),
-      contentPadding: const EdgeInsets.all(AppSpacing.lg),
+      hintStyle: UITextStyle.bodyText2,
+      contentPadding: const EdgeInsets.all(AppSpacing.xlg),
       border: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
+        gapPadding: AppSpacing.spaceUnit,
       ),
       filled: true,
       isDense: true,
@@ -261,11 +261,11 @@ class AppTheme {
   }
 }
 
-InputBorder get _textFieldBorder => const OutlineInputBorder(
+InputBorder get _textFieldBorder => const UnderlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(10)),
       borderSide: BorderSide(
-        width: 1.5,
-        color: AppColors.green,
+        color: AppColors.black,
+        width: AppSpacing.sm,
       ),
     );
 
