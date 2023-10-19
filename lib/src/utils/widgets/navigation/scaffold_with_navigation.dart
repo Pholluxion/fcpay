@@ -124,7 +124,6 @@ class _ScaffoldWithNavigationBar extends StatelessWidget {
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: NavigationBar(
-        backgroundColor: const Color(0xffA7E04B),
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: (index) {
           navigationShell.goBranch(
