@@ -48,16 +48,18 @@ class LoginForm extends StatelessWidget {
         child: ListView(
           physics: const ClampingScrollPhysics(),
           shrinkWrap: true,
-          padding: const EdgeInsets.all(AppSpacing.xlg),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xlg),
           children: [
-            const AppLogo(),
-            const SizedBox(height: 16),
+            const AppLogo(
+              height: 250,
+              width: 300,
+            ),
             _EmailInput(),
             const SizedBox(height: 8),
             _PasswordInput(),
             const SizedBox(height: 8),
             _LoginButton(),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSpacing.xlg * 4),
             _FingerPrintButton(),
           ],
         ),

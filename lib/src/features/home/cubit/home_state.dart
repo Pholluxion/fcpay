@@ -1,24 +1,18 @@
 part of 'home_cubit.dart';
 
 class HomeState extends Equatable {
-  const HomeState({
-    this.customProperty = 'Default Value',
-  });
+  const HomeState({this.accounts = const []});
 
-  final String customProperty;
+  final List<Account> accounts;
 
   @override
-  List<Object> get props => [customProperty];
+  List<Object> get props => [accounts];
 
   HomeState copyWith({
-    String? customProperty,
+    List<Account>? accounts,
   }) {
     return HomeState(
-      customProperty: customProperty ?? this.customProperty,
+      accounts: accounts ?? this.accounts,
     );
   }
-}
-
-class HomeInitial extends HomeState {
-  const HomeInitial() : super();
 }

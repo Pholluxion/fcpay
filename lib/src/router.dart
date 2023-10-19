@@ -1,3 +1,4 @@
+import 'package:fcpay/src/features/account/view/account_page.dart';
 import 'package:fcpay/src/features/onboarding/onboarding.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,15 +28,19 @@ final router = GoRouter(
         TypedGoRoute<HomePageRoute>(
           path: '/home',
           name: 'Home',
+          routes: [
+            TypedGoRoute<AccountPageRoute>(
+              path: ':accountId',
+              name: 'Account',
+              routes: [
+                TypedGoRoute<QRGenPageRoute>(
+                  path: 'qr-view',
+                  name: 'QR-View',
+                ),
+              ],
+            ),
+          ],
         ),
-      ],
-    ),
-    TypedStatefulShellBranch(
-      routes: [
-        TypedGoRoute<QRViewScreenRoute>(
-          path: '/qr-view',
-          name: 'QR-View',
-        )
       ],
     ),
   ],
@@ -52,6 +57,16 @@ class ShellRouteData extends StatefulShellRouteData {
     return ScaffoldWithNavigation(
       navigationShell: navigationShell,
     );
+  }
+}
+
+class AccountPageRoute extends GoRouteData {
+  const AccountPageRoute({required this.accountId});
+  final String accountId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return AccountPage(account: accountId);
   }
 }
 
@@ -105,11 +120,13 @@ class QRPageRoute extends GoRouteData {
   }
 }
 
-class QRViewScreenRoute extends GoRouteData {
-  const QRViewScreenRoute();
+class QRGenPageRoute extends GoRouteData {
+  const QRGenPageRoute({required this.accountId});
+
+  final String accountId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const QRViewScreen(data: "hola");
+    return QRGenPage(data: accountId);
   }
 }

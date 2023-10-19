@@ -70,11 +70,8 @@ class AppTheme {
       titleTextStyle: _textTheme.titleLarge,
       elevation: 0,
       toolbarHeight: 64,
-      backgroundColor: AppColors.transparent,
-      systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.light,
-      ),
+      systemOverlayStyle:
+          const SystemUiOverlayStyle(statusBarColor: AppColors.transparent),
     );
   }
 

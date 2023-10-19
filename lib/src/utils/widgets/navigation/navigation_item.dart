@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:recase/recase.dart';
 
 enum NavigationItem {
-  home(iconData: Icons.dashboard_outlined),
-  qrview(iconData: Icons.qr_code),
+  home(iconData: Icons.credit_card, label: 'Cuentas'),
+  qrview(iconData: Icons.qr_code, label: 'Mis códigos QR'),
+  dashboard(iconData: Icons.bar_chart, label: 'Dashboard'),
   ;
 
-  const NavigationItem({required this.iconData});
+  const NavigationItem({
+    required this.iconData,
+    required this.label,
+  });
+
   final IconData iconData;
-  String get label => name.pascalCase;
+  final String label;
 }

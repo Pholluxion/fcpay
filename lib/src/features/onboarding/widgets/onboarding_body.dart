@@ -28,7 +28,10 @@ class OnboardingBody extends StatelessWidget {
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(AppSpacing.xlg),
                 children: [
-                  const AppLogo(),
+                  const AppLogo(
+                    height: 300,
+                    width: 200,
+                  ),
                   const SizedBox(height: 48),
                   _LoginButton(),
                   const SizedBox(height: 16),

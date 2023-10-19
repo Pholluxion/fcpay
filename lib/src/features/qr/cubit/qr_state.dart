@@ -1,24 +1,49 @@
+// ignore_for_file: non_constant_identifier_names
+
 part of 'qr_cubit.dart';
 
 class QrState extends Equatable {
   const QrState({
-    this.customProperty = 'Default Value',
+    this.forms = const [],
+    this.documento = 0,
+    this.monto = 0,
+    this.description = '',
+    this.form_id = 0,
+    this.qrcode = '',
   });
 
-  final String customProperty;
+  final List<Form> forms;
+  final int documento;
+  final int monto;
+  final String description;
+  final int form_id;
+  final String qrcode;
 
   @override
-  List<Object> get props => [customProperty];
+  List<Object> get props => [
+        forms,
+        documento,
+        monto,
+        description,
+        form_id,
+        qrcode,
+      ];
 
   QrState copyWith({
-    String? customProperty,
+    List<Form>? forms,
+    int? documento,
+    int? monto,
+    String? description,
+    int? form_id,
+    String? qrcode,
   }) {
     return QrState(
-      customProperty: customProperty ?? this.customProperty,
+      forms: forms ?? this.forms,
+      documento: documento ?? this.documento,
+      monto: monto ?? this.monto,
+      description: description ?? this.description,
+      form_id: form_id ?? this.form_id,
+      qrcode: qrcode ?? this.qrcode,
     );
   }
-}
-
-class QrInitial extends QrState {
-  const QrInitial() : super();
 }

@@ -1,20 +1,24 @@
-import 'package:flutter/material.dart';
 import 'package:fcpay/src/features/home/cubit/cubit.dart';
+import 'package:flutter/material.dart';
 import 'package:fcpay/src/features/home/widgets/home_body.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeCubit>().getAccounts();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          HomeCubit(context.read<SharedPreferences>())..getAccounts(),
-      child: const Scaffold(
-        body: HomeView(),
-      ),
-    );
+    return const Scaffold(body: HomeView());
   }
 }
 

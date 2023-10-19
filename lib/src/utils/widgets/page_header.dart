@@ -1,3 +1,4 @@
+import 'package:fcpay/src/ui/ui.dart';
 import 'package:flutter/material.dart';
 
 class PageHeader extends StatelessWidget {
@@ -8,19 +9,24 @@ class PageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: theme.textTheme.headlineMedium!.copyWith(
-            fontWeight: FontWeight.w700,
+    return Padding(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: UITextStyle.headline3.copyWith(
+              fontWeight: FontWeight.w700,
+              color: const Color(
+                0xff545454,
+              ),
+            ),
           ),
-        ),
-        Text(description),
-      ],
+          Text(description),
+        ],
+      ),
     );
   }
 }

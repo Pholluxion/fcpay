@@ -20,15 +20,20 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
               path: '/home',
               name: 'Home',
               factory: $HomePageRouteExtension._fromState,
-            ),
-          ],
-        ),
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/qr-view',
-              name: 'QR-View',
-              factory: $QRViewScreenRouteExtension._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: ':accountId',
+                  name: 'Account',
+                  factory: $AccountPageRouteExtension._fromState,
+                  routes: [
+                    GoRouteData.$route(
+                      path: 'qr-view',
+                      name: 'QR-View',
+                      factory: $QRGenPageRouteExtension._fromState,
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
@@ -57,12 +62,32 @@ extension $HomePageRouteExtension on HomePageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $QRViewScreenRouteExtension on QRViewScreenRoute {
-  static QRViewScreenRoute _fromState(GoRouterState state) =>
-      const QRViewScreenRoute();
+extension $AccountPageRouteExtension on AccountPageRoute {
+  static AccountPageRoute _fromState(GoRouterState state) => AccountPageRoute(
+        accountId: state.pathParameters['accountId']!,
+      );
 
   String get location => GoRouteData.$location(
-        '/qr-view',
+        '/home/${Uri.encodeComponent(accountId)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $QRGenPageRouteExtension on QRGenPageRoute {
+  static QRGenPageRoute _fromState(GoRouterState state) => QRGenPageRoute(
+        accountId: state.pathParameters['accountId']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/home/${Uri.encodeComponent(accountId)}/qr-view',
       );
 
   void go(BuildContext context) => context.go(location);
