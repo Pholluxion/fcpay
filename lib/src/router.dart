@@ -1,5 +1,6 @@
 import 'package:fcpay/src/features/account/view/account_page.dart';
 import 'package:fcpay/src/features/onboarding/onboarding.dart';
+import 'package:fcpay/src/features/qr/view/qr_history.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -40,6 +41,14 @@ final router = GoRouter(
               ],
             ),
           ],
+        ),
+      ],
+    ),
+    TypedStatefulShellBranch(
+      routes: [
+        TypedGoRoute<QRHistoryPageRoute>(
+          path: '/history',
+          name: 'History',
         ),
       ],
     ),
@@ -128,5 +137,14 @@ class QRGenPageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return QRGenPage(data: accountId);
+  }
+}
+
+class QRHistoryPageRoute extends GoRouteData {
+  const QRHistoryPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const QRHistoryPage();
   }
 }

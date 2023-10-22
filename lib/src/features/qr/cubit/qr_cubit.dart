@@ -64,7 +64,12 @@ class QrCubit extends Cubit<QrState> {
         id: cId,
       );
 
-      emit(state.copyWith(qrcode: response.codigo_id));
+      _sharedPreferences.setString(id, response.codigo_id ?? '');
+
+      emit(state.copyWith(
+        qrcode: response.codigo_id ?? '',
+        message: response.message ?? response.error ?? '',
+      ));
     } catch (e) {
       log(e.toString());
     }

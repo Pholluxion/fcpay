@@ -79,7 +79,12 @@ class _QRGenViewState extends State<QRGenView> {
                     );
                   },
                 ),
-                BlocBuilder<QrCubit, QrState>(
+                BlocConsumer<QrCubit, QrState>(
+                  listener: (context, state) {
+                    if (state.message.isNotEmpty) {
+                      _showMyDialog(state.message);
+                    }
+                  },
                   builder: (context, state) {
                     return Visibility(
                       visible: state.qrcode.isNotEmpty,
@@ -152,6 +157,27 @@ class _QRGenViewState extends State<QRGenView> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _showMyDialog(String message) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Apreciado ususario'),
+          content: SingleChildScrollView(child: Text(message)),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Aceptar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

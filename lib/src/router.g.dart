@@ -37,6 +37,15 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
             ),
           ],
         ),
+        StatefulShellBranchData.$branch(
+          routes: [
+            GoRouteData.$route(
+              path: '/history',
+              name: 'History',
+              factory: $QRHistoryPageRouteExtension._fromState,
+            ),
+          ],
+        ),
       ],
     );
 
@@ -88,6 +97,24 @@ extension $QRGenPageRouteExtension on QRGenPageRoute {
 
   String get location => GoRouteData.$location(
         '/home/${Uri.encodeComponent(accountId)}/qr-view',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $QRHistoryPageRouteExtension on QRHistoryPageRoute {
+  static QRHistoryPageRoute _fromState(GoRouterState state) =>
+      const QRHistoryPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/history',
       );
 
   void go(BuildContext context) => context.go(location);

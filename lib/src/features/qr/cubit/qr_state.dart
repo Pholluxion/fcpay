@@ -10,6 +10,7 @@ class QrState extends Equatable {
     this.description = '',
     this.form_id = 0,
     this.qrcode = '',
+    this.message = '',
   });
 
   final List<Form> forms;
@@ -18,16 +19,11 @@ class QrState extends Equatable {
   final String description;
   final int form_id;
   final String qrcode;
+  final String message;
 
   @override
-  List<Object> get props => [
-        forms,
-        documento,
-        monto,
-        description,
-        form_id,
-        qrcode,
-      ];
+  List<Object> get props =>
+      [forms, documento, monto, description, form_id, qrcode, message];
 
   QrState copyWith({
     List<Form>? forms,
@@ -36,6 +32,7 @@ class QrState extends Equatable {
     String? description,
     int? form_id,
     String? qrcode,
+    String? message,
   }) {
     return QrState(
       forms: forms ?? this.forms,
@@ -44,6 +41,7 @@ class QrState extends Equatable {
       description: description ?? this.description,
       form_id: form_id ?? this.form_id,
       qrcode: qrcode ?? this.qrcode,
+      message: message ?? this.message,
     );
   }
 }

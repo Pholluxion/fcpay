@@ -20,8 +20,9 @@ QRResponse _$QRResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$QRResponse {
-  String get message => throw _privateConstructorUsedError;
-  String get codigo_id => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
+  String? get codigo_id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $QRResponseCopyWith<$Res> {
           QRResponse value, $Res Function(QRResponse) then) =
       _$QRResponseCopyWithImpl<$Res, QRResponse>;
   @useResult
-  $Res call({String message, String codigo_id});
+  $Res call({String? message, String? error, String? codigo_id});
 }
 
 /// @nodoc
@@ -51,18 +52,23 @@ class _$QRResponseCopyWithImpl<$Res, $Val extends QRResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
-    Object? codigo_id = null,
+    Object? message = freezed,
+    Object? error = freezed,
+    Object? codigo_id = freezed,
   }) {
     return _then(_value.copyWith(
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      codigo_id: null == codigo_id
+              as String?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+      codigo_id: freezed == codigo_id
           ? _value.codigo_id
           : codigo_id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -75,7 +81,7 @@ abstract class _$$QRResponseImplCopyWith<$Res>
       __$$QRResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String message, String codigo_id});
+  $Res call({String? message, String? error, String? codigo_id});
 }
 
 /// @nodoc
@@ -89,18 +95,23 @@ class __$$QRResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
-    Object? codigo_id = null,
+    Object? message = freezed,
+    Object? error = freezed,
+    Object? codigo_id = freezed,
   }) {
     return _then(_$QRResponseImpl(
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      codigo_id: null == codigo_id
+              as String?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+      codigo_id: freezed == codigo_id
           ? _value.codigo_id
           : codigo_id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -108,19 +119,22 @@ class __$$QRResponseImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$QRResponseImpl implements _QRResponse {
-  const _$QRResponseImpl({required this.message, required this.codigo_id});
+  const _$QRResponseImpl(
+      {required this.message, required this.error, required this.codigo_id});
 
   factory _$QRResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$QRResponseImplFromJson(json);
 
   @override
-  final String message;
+  final String? message;
   @override
-  final String codigo_id;
+  final String? error;
+  @override
+  final String? codigo_id;
 
   @override
   String toString() {
-    return 'QRResponse(message: $message, codigo_id: $codigo_id)';
+    return 'QRResponse(message: $message, error: $error, codigo_id: $codigo_id)';
   }
 
   @override
@@ -129,13 +143,14 @@ class _$QRResponseImpl implements _QRResponse {
         (other.runtimeType == runtimeType &&
             other is _$QRResponseImpl &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.error, error) || other.error == error) &&
             (identical(other.codigo_id, codigo_id) ||
                 other.codigo_id == codigo_id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, message, codigo_id);
+  int get hashCode => Object.hash(runtimeType, message, error, codigo_id);
 
   @JsonKey(ignore: true)
   @override
@@ -153,16 +168,19 @@ class _$QRResponseImpl implements _QRResponse {
 
 abstract class _QRResponse implements QRResponse {
   const factory _QRResponse(
-      {required final String message,
-      required final String codigo_id}) = _$QRResponseImpl;
+      {required final String? message,
+      required final String? error,
+      required final String? codigo_id}) = _$QRResponseImpl;
 
   factory _QRResponse.fromJson(Map<String, dynamic> json) =
       _$QRResponseImpl.fromJson;
 
   @override
-  String get message;
+  String? get message;
   @override
-  String get codigo_id;
+  String? get error;
+  @override
+  String? get codigo_id;
   @override
   @JsonKey(ignore: true)
   _$$QRResponseImplCopyWith<_$QRResponseImpl> get copyWith =>

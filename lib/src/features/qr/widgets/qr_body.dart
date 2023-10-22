@@ -1,7 +1,14 @@
+import 'dart:io';
+
 import 'package:fcpay/src/ui/ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+final Uri _url =
+    Uri.parse('https://react-hackathon-two.vercel.app/simulacion-pago-pse');
 
 class QrBody extends StatefulWidget {
   const QrBody({super.key});
@@ -16,12 +23,19 @@ class _QrBodyState extends State<QrBody> {
   QRViewController? controller;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void reassemble() {
     super.reassemble();
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      controller!.pauseCamera();
-    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      controller!.resumeCamera();
+    if (!kIsWeb) {
+      if (Platform.isAndroid) {
+        controller!.pauseCamera();
+      } else if (Platform.isIOS) {
+        controller!.resumeCamera();
+      }
     }
   }
 
@@ -29,18 +43,21 @@ class _QrBodyState extends State<QrBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: const Color(0xffA7E04B)),
-      body: Stack(
-        children: <Widget>[
-          Expanded(
-            flex: 5,
-            child: QRView(
-              key: qrKey,
-              overlay: QrScannerOverlayShape(borderColor: Colors.white70),
-              onQRViewCreated: _onQRViewCreated,
+      body: FutureBuilder(
+        future: Permission.camera.request(),
+        builder: (context, snapshot) => Stack(
+          children: <Widget>[
+            Expanded(
+              flex: 5,
+              child: QRView(
+                key: qrKey,
+                overlay: QrScannerOverlayShape(borderColor: Colors.white70),
+                onQRViewCreated: _onQRViewCreated,
+              ),
             ),
-          ),
-          const Center(child: AppLogo())
-        ],
+            const Center(child: AppLogo())
+          ],
+        ),
       ),
     );
   }
@@ -50,6 +67,7 @@ class _QrBodyState extends State<QrBody> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        _launchUrl();
       });
     });
   }
@@ -58,5 +76,11 @@ class _QrBodyState extends State<QrBody> {
   void dispose() {
     controller?.dispose();
     super.dispose();
+  }
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 }
